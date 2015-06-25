@@ -1,0 +1,21 @@
+{
+  "name": "polygons.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/raorao/polygons.js",
+  "authors": [
+    "raorao <savinirs@gmail.com>"
+  ],
+  "description": "Simple library for constructing regular polygons in JavaScript and HTML5 using canvas.",
+  "main": "polygon.js",
+  "keywords": [
+    "canvas"
+  ],
+  "license": "Apache-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
