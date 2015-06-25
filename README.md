@@ -5,9 +5,18 @@ Simple library for constructing regular polygons in JS/HTML5 using canvas.
 
 Usage
 ---------------------
-```
-var polygon = Polygon.build({sides: 5});
-polygon.renderTo(containerElement);
+```javascript
+  polygonCanvas = Polygon.build({
+    sides: 10,
+    size: 500,
+    borderWidth: 7,
+    borderColor: '#000000',
+    fillColor:   '#0000FF',
+    unfilledColor: 'white',
+    fillPercentage: .7
+  })
+
+  document.getElementById('container').appendChild(polygonCanvas)
 ```
 
 
