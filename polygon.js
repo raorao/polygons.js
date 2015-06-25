@@ -39,20 +39,17 @@ Polygon = (function() {
       cxt.fillStyle = this.fillColor;
       cxt.fill()
       return this;
-
     },
-
-    renderTo: function(container) {
-      container.appendChild(this.canvas)
-    }
   }
 
   return {
     build: function(opts) {
-      var context = document.createElement('canvas')
-      context.height = opts.size
-      context.width  = opts.size
-      return new Shape(context,opts).build()
+      var canvas    = document.createElement('canvas')
+      canvas.height = opts.size
+      canvas.width  = opts.size
+      new Shape(canvas,opts).build()
+
+      return canvas
     },
   }
 })()
