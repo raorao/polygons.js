@@ -89,6 +89,7 @@ Polygon = (function() {
   return {
     build: function(opts) {
       var canvas    = document.createElement('canvas')
+      canvas.className = 'polygon'
       canvas.height = opts.size
       canvas.width  = opts.size
       new Shape(canvas,opts).build()
