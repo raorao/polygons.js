@@ -35,13 +35,15 @@ if (!Object.assign) {
 Polygon = (function() {
 
   Shape = function(canvas, opts) {
-    this.canvas    = canvas;
-    this.sideCount = opts.sides;
-    this.size      = opts.size/2 - opts.borderWidth
-    this.center    = opts.size/2
-    this.borderWidth = opts.borderWidth
-    this.borderColor = opts.borderColor
-    this.fillColor   = opts.fillColor
+    this.canvas        = canvas;
+    this.sideCount     = opts.sides;
+    this.radius        = opts.size/2 - opts.borderWidth
+    this.center        = opts.size/2
+    this.borderWidth   = opts.borderWidth
+    this.borderColor   = opts.borderColor || 'black'
+    this.fillHeight    = opts.size*2 * (1 - (opts.fillPercentage || 0.99))
+    this.fillColor     = opts.fillColor || 'white'
+    this.unfilledColor = opts.unfilledColor || 'white'
   }
 
   Shape.prototype = {
@@ -50,11 +52,11 @@ Polygon = (function() {
     },
 
     nextX: function(sideIndex) {
-      return this.center + this.size * Math.cos(sideIndex * 2 * Math.PI / this.sideCount)
+      return this.center + this.radius * Math.cos(sideIndex * 2 * Math.PI / this.sideCount)
     },
 
     nextY: function(sideIndex) {
-      return this.center + this.size * Math.sin(sideIndex * 2 * Math.PI / this.sideCount)
+      return this.center + this.radius * Math.sin(sideIndex * 2 * Math.PI / this.sideCount)
     },
 
     build: function() {
