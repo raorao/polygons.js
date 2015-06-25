@@ -16,6 +16,7 @@ if (!Object.assign) {
         if (nextSource === undefined || nextSource === null) {
           continue;
         }
+
         nextSource = Object(nextSource);
 
         var keysArray = Object.keys(Object(nextSource));
@@ -27,6 +28,7 @@ if (!Object.assign) {
           }
         }
       }
+
       return to;
     }
   });
@@ -36,32 +38,32 @@ Polygon = (function() {
 
   Shape = function(canvas, opts) {
     this.canvas        = canvas;
-    this.context       = canvas.getContext('2d')
+    this.context       = canvas.getContext('2d');
     this.sideCount     = opts.sides;
-    this.radius        = opts.size/2 - opts.borderWidth
-    this.center        = opts.size/2
-    this.borderWidth   = opts.borderWidth
-    this.borderColor   = opts.borderColor || 'black'
-    this.fillHeight    = opts.size*2 * (1 - (opts.fillPercentage || 0.99))
-    this.fillColor     = opts.fillColor || 'white'
-    this.unfilledColor = opts.unfilledColor || 'white'
-  }
+    this.radius        = opts.size / 2 - opts.borderWidth;
+    this.center        = opts.size / 2;
+    this.borderWidth   = opts.borderWidth;
+    this.borderColor   = opts.borderColor || 'black';
+    this.fillHeight    = opts.size * 2 * (1 - (opts.fillPercentage || 0.99));
+    this.fillColor     = opts.fillColor || 'white';
+    this.unfilledColor = opts.unfilledColor || 'white';
+  };
 
   Shape.prototype = {
     nextX: function(sideIndex) {
-      return this.center + this.radius * Math.cos(sideIndex * 2 * Math.PI / this.sideCount)
+      return this.center + this.radius * Math.cos(sideIndex * 2 * Math.PI / this.sideCount);
     },
 
     nextY: function(sideIndex) {
-      return this.center + this.radius * Math.sin(sideIndex * 2 * Math.PI / this.sideCount)
+      return this.center + this.radius * Math.sin(sideIndex * 2 * Math.PI / this.sideCount);
     },
 
     drawSides: function() {
-      this.context.beginPath()
-      this.context.moveTo(this.nextX(0),this.nextY(0));
+      this.context.beginPath();
+      this.context.moveTo(this.nextX(0), this.nextY(0));
 
-      for(var i = 1; i <= this.sideCount; i++) {
-        this.context.lineTo(this.nextX(i),this.nextY(i));
+      for (var i = 1; i <= this.sideCount; i++) {
+        this.context.lineTo(this.nextX(i), this.nextY(i));
       }
 
       this.context.strokeStyle = this.borderColor;
@@ -69,7 +71,7 @@ Polygon = (function() {
     },
 
     drawFill: function() {
-      var fillStyle = this.context.createLinearGradient(0,0,0,this.fillHeight);
+      var fillStyle = this.context.createLinearGradient(0, 0, 0, this.fillHeight);
       fillStyle.addColorStop(0, this.unfilledColor);
       fillStyle.addColorStop(0.5, this.unfilledColor);
       fillStyle.addColorStop(0.5, this.fillColor);
@@ -78,23 +80,23 @@ Polygon = (function() {
     },
 
     build: function() {
-      this.drawSides()
-      this.drawFill()
-      this.context.fill()
+      this.drawSides();
+      this.drawFill();
+      this.context.fill();
       this.context.stroke();
       return this;
-    },
-  }
+    }
+  };
 
   return {
     build: function(opts) {
-      var canvas    = document.createElement('canvas')
-      canvas.className = 'polygon'
-      canvas.height = opts.size
-      canvas.width  = opts.size
-      new Shape(canvas,opts).build()
+      var canvas    = document.createElement('canvas');
+      canvas.className = 'polygon';
+      canvas.height = opts.size;
+      canvas.width  = opts.size;
+      new Shape(canvas, opts).build();
 
-      return canvas
-    },
-  }
-})()
+      return canvas;
+    }
+  };
+})();
