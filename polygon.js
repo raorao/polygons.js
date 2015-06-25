@@ -1,11 +1,13 @@
 Polygon = (function() {
 
-  Shape = function(canvas, sideCount, size, borderWidth) {
+  Shape = function(canvas, opts) {
     this.canvas    = canvas;
-    this.sideCount = sideCount;
-    this.size      = size/2 - borderWidth
-    this.center    = size/2
-    this.borderWidth = borderWidth
+    this.sideCount = opts.sides;
+    this.size      = opts.size/2 - opts.borderWidth
+    this.center    = opts.size/2
+    this.borderWidth = opts.borderWidth
+    this.borderColor = opts.borderColor
+    this.fillColor   = opts.fillColor
   }
 
   Shape.prototype = {
@@ -31,9 +33,11 @@ Polygon = (function() {
         cxt.lineTo(this.nextX(i),this.nextY(i));
       }
 
-      cxt.strokeStyle = "#000000";
+      cxt.strokeStyle = this.borderColor;
       cxt.lineWidth = this.borderWidth;
       cxt.stroke();
+      cxt.fillStyle = this.fillColor;
+      cxt.fill()
       return this;
 
     },
@@ -48,7 +52,7 @@ Polygon = (function() {
       var context = document.createElement('canvas')
       context.height = opts.size
       context.width  = opts.size
-      return new Shape(context, opts.sides, opts.size, opts.borderWidth).build()
+      return new Shape(context,opts).build()
     },
   }
 })()
