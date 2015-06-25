@@ -69,11 +69,19 @@ Polygon = (function() {
         cxt.lineTo(this.nextX(i),this.nextY(i));
       }
 
+      var fill = cxt.createLinearGradient(0,0,0,this.fillHeight);
+      fill.addColorStop(0, this.unfilledColor);
+      fill.addColorStop(0.5, this.unfilledColor);
+      fill.addColorStop(0.5, this.fillColor);
+      fill.addColorStop(1, this.fillColor);
+
+      cxt.fillStyle = fill;
+      cxt.fill()
+
       cxt.strokeStyle = this.borderColor;
       cxt.lineWidth = this.borderWidth;
       cxt.stroke();
-      cxt.fillStyle = this.fillColor;
-      cxt.fill()
+
       return this;
     },
   }
