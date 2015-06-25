@@ -36,6 +36,7 @@ Polygon = (function() {
 
   Shape = function(canvas, opts) {
     this.canvas        = canvas;
+    this.context       = canvas.getContext('2d')
     this.sideCount     = opts.sides;
     this.radius        = opts.size/2 - opts.borderWidth
     this.center        = opts.size/2
@@ -47,10 +48,6 @@ Polygon = (function() {
   }
 
   Shape.prototype = {
-    context: function() {
-      return this.contextCache = this.contextCache || this.canvas.getContext('2d');
-    },
-
     nextX: function(sideIndex) {
       return this.center + this.radius * Math.cos(sideIndex * 2 * Math.PI / this.sideCount)
     },
@@ -59,29 +56,32 @@ Polygon = (function() {
       return this.center + this.radius * Math.sin(sideIndex * 2 * Math.PI / this.sideCount)
     },
 
-    build: function() {
-      var cxt = this.context()
-      cxt.beginPath()
-
-      cxt.moveTo(this.nextX(0),this.nextY(0));
+    drawSides: function() {
+      this.context.beginPath()
+      this.context.moveTo(this.nextX(0),this.nextY(0));
 
       for(var i = 1; i <= this.sideCount; i++) {
-        cxt.lineTo(this.nextX(i),this.nextY(i));
+        this.context.lineTo(this.nextX(i),this.nextY(i));
       }
 
-      var fill = cxt.createLinearGradient(0,0,0,this.fillHeight);
-      fill.addColorStop(0, this.unfilledColor);
-      fill.addColorStop(0.5, this.unfilledColor);
-      fill.addColorStop(0.5, this.fillColor);
-      fill.addColorStop(1, this.fillColor);
+      this.context.strokeStyle = this.borderColor;
+      this.context.lineWidth   = this.borderWidth;
+    },
 
-      cxt.fillStyle = fill;
-      cxt.fill()
+    drawFill: function() {
+      var fillStyle = this.context.createLinearGradient(0,0,0,this.fillHeight);
+      fillStyle.addColorStop(0, this.unfilledColor);
+      fillStyle.addColorStop(0.5, this.unfilledColor);
+      fillStyle.addColorStop(0.5, this.fillColor);
+      fillStyle.addColorStop(1, this.fillColor);
+      this.context.fillStyle = fillStyle;
+    },
 
-      cxt.strokeStyle = this.borderColor;
-      cxt.lineWidth = this.borderWidth;
-      cxt.stroke();
-
+    build: function() {
+      this.drawSides()
+      this.drawFill()
+      this.context.fill()
+      this.context.stroke();
       return this;
     },
   }
