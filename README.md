@@ -6,7 +6,8 @@ Simple library for constructing regular polygons in JS/HTML5 using canvas.
 Usage
 ---------------------
 ```javascript
-  polygonCanvas = Polygon.build({
+  var canvas = document.createElement('canvas')
+  polygonCanvas = Polygon.build(canvas, {
     sides: 10,
     size: 500,
     borderWidth: 7,
