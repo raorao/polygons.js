@@ -47,6 +47,7 @@ Polygon = (function() {
     this.fillHeight    = opts.size * 2 * (1 - (opts.fillPercentage || 0.99));
     this.fillColor     = opts.fillColor || 'white';
     this.unfilledColor = opts.unfilledColor || 'white';
+    this.fillImage     = opts.fillImage;
   };
 
   Shape.prototype = {
@@ -71,6 +72,14 @@ Polygon = (function() {
     },
 
     drawFill: function() {
+      if (this.fillImage != null) {
+        this.context.fillStyle = this.context.createPattern(this.fillImage, 'repeat')
+      } else {
+        this.drawFillGradient()
+      }
+    },
+
+    drawFillGradient: function() {
       var fillStyle = this.context.createLinearGradient(0, 0, 0, this.fillHeight);
       fillStyle.addColorStop(0, this.unfilledColor);
       fillStyle.addColorStop(0.5, this.unfilledColor);
