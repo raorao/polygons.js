@@ -72,10 +72,11 @@ Polygon = (function() {
     },
 
     drawFill: function() {
+      this.drawFillGradient();
+      this.context.fill();
       if (this.fillImage != null) {
-        this.context.fillStyle = this.context.createPattern(this.fillImage, 'repeat')
-      } else {
-        this.drawFillGradient()
+        this.context.fillStyle = this.context.createPattern(this.fillImage, 'repeat');
+        this.context.fill();
       }
     },
 
@@ -91,7 +92,6 @@ Polygon = (function() {
     build: function() {
       this.drawSides();
       this.drawFill();
-      this.context.fill();
       this.context.stroke();
       return this;
     }
