@@ -36,6 +36,10 @@ if (!Object.assign) {
 
 Polygon = (function() {
 
+  round = function(num) {
+    return Math.round(num*100000)/100000
+  }
+
   Shape = function(canvas, opts) {
     this.canvas        = canvas;
     this.context       = canvas.getContext('2d');
@@ -47,7 +51,7 @@ Polygon = (function() {
     this.fillColor     = opts.fillColor || 'white';
     this.unfilledColor = opts.unfilledColor || 'white';
     this.fillImage     = opts.fillImage;
-    this.rotation      = opts.rotation || 0;
+    this.rotation      = round((opts.rotation || 0) * 2 * Math.PI)
     this.indeces       = this.calculateIndeces();
     this.fillHeight    = this.calculateFillHeight(opts.fillPercentage, opts.size);
   };
@@ -81,11 +85,11 @@ Polygon = (function() {
     },
 
     nextX: function(sideIndex) {
-      return this.center + this.radius * Math.cos(sideIndex * 2 * Math.PI / this.sideCount);
+      return this.center + this.radius * Math.cos(round(sideIndex * 2 * Math.PI / this.sideCount));
     },
 
     nextY: function(sideIndex) {
-      return this.center + this.radius * Math.sin(sideIndex * 2 * Math.PI / this.sideCount);
+      return this.center + this.radius * Math.sin(round(sideIndex * 2 * Math.PI / this.sideCount));
     },
 
     drawSides: function() {
