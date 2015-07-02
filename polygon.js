@@ -78,9 +78,9 @@ Polygon = (function() {
 
       var yCoordinates = this.indeces.map(function(indexTuple) { return indexTuple[1]; });
 
-      var lowestY  = Math.max.apply(null, yCoordinates) + (this.borderWidth - 3);
-      var higestY  = Math.min.apply(null, yCoordinates) - (this.borderWidth + 3);
-      return 2 * (((lowestY - higestY) * (1 - percentage)) + higestY);
+      var lowestY   = Math.max.apply(null, yCoordinates) + (this.borderWidth - 3);
+      var highestY  = Math.min.apply(null, yCoordinates) - (this.borderWidth + 3);
+      return 2 * (((lowestY - highestY) * (1 - percentage)) + highestY);
 
     },
 
