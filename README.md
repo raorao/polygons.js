@@ -14,7 +14,8 @@ Usage
     borderColor: '#000000',
     fillColor:   '#0000FF',
     unfilledColor: 'white',
-    fillPercentage: .7
+    fillPercentage: .7,
+    rotation: 0.75
   })
 
   document.getElementById('container').appendChild(polygonCanvas)
@@ -26,6 +27,7 @@ available options:
 - sides: (INT) sets number of sides of shape.
 - borderWidth: (INT) sets width of border. defined in pixels.
 - size: (INT) sets size of element. unaffected by border width declarations. defined in pixels.
+- rotation: (NUM) (OPTIONAL) rotates the polygon by the provided percent. defaults to 0 if not provided.
 - borderColor: (STRING) (OPTIONAL) sets color of border. set with hash, e.g. `"#0000FF"`. defaults to black.
 - fillPercentage: (STRING) (OPTIONAL) sets amount of vertical fill from bottom to top. defaults to completely filled.
 - fillColor: (STRING) (OPTIONAL) sets color of filled area. set with hash, e.g. `"#0000FF"`
