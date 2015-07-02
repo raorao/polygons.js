@@ -44,11 +44,11 @@ Polygon = (function() {
     this.center        = opts.size / 2;
     this.borderWidth   = opts.borderWidth;
     this.borderColor   = opts.borderColor || 'black';
-    this.fillHeight    = opts.size * 2 * (1 - (opts.fillPercentage || 0.99));
     this.fillColor     = opts.fillColor || 'white';
     this.unfilledColor = opts.unfilledColor || 'white';
     this.fillImage     = opts.fillImage;
     this.indeces       = this.calculateIndeces();
+    this.fillHeight    = this.calculateFillHeight(opts.fillPercentage, opts.size);
   };
 
   Shape.prototype = {
@@ -60,6 +60,17 @@ Polygon = (function() {
       }
 
       return indeces;
+    },
+
+    calculateFillHeight: function(percentage, size) {
+      if (percentage === 1 || typeof percentage === 'undefined' || percentage === null) { return 0.99999; };
+
+      var yCoordinates = this.indeces.map(function(indexTuple) { return indexTuple[1]; });
+
+      var lowestY  = Math.max.apply(null, yCoordinates) + this.borderWidth;
+      var higestY  = Math.min.apply(null, yCoordinates) - this.borderWidth;
+      return 2 * (((lowestY - higestY) * (1 - percentage)) + higestY);
+
     },
 
     nextX: function(sideIndex) {
