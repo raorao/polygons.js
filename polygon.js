@@ -48,9 +48,20 @@ Polygon = (function() {
     this.fillColor     = opts.fillColor || 'white';
     this.unfilledColor = opts.unfilledColor || 'white';
     this.fillImage     = opts.fillImage;
+    this.indeces       = this.calculateIndeces();
   };
 
   Shape.prototype = {
+    calculateIndeces: function() {
+      var indeces = [];
+
+      for (var i = 0; i <= this.sideCount; i++) {
+        indeces.push([this.nextX(i), this.nextY(i)]);
+      }
+
+      return indeces;
+    },
+
     nextX: function(sideIndex) {
       return this.center + this.radius * Math.cos(sideIndex * 2 * Math.PI / this.sideCount);
     },
@@ -61,11 +72,14 @@ Polygon = (function() {
 
     drawSides: function() {
       this.context.beginPath();
-      this.context.moveTo(this.nextX(0), this.nextY(0));
 
-      for (var i = 1; i <= this.sideCount; i++) {
-        this.context.lineTo(this.nextX(i), this.nextY(i));
-      }
+      this.indeces.forEach(function(indexTuple, position) {
+        if (position === 0) {
+          this.context.moveTo(indexTuple[0], indexTuple[1]);
+        } else {
+          this.context.lineTo(indexTuple[0], indexTuple[1]);
+        }
+      }.bind(this));
 
       this.context.strokeStyle = this.borderColor;
       this.context.lineWidth   = this.borderWidth;
