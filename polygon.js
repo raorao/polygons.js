@@ -44,7 +44,7 @@ Polygon = (function() {
     this.canvas        = canvas;
     this.context       = canvas.getContext('2d');
     this.sideCount     = opts.sides;
-    this.radius        = (opts.size - opts.borderWidth) / 2
+    this.radius        = (opts.size - opts.borderWidth) / 2;
     this.center        = opts.size / 2;
     this.borderWidth   = opts.borderWidth;
     this.borderColor   = opts.borderColor || 'black';
@@ -77,8 +77,9 @@ Polygon = (function() {
       if (percentage === 1 || typeof percentage === 'undefined' || percentage === null) { return 1; };
 
       var yCoordinates = this.indeces.map(function(indexTuple) { return indexTuple[1]; });
-      var lowestY      = Math.max.apply(null, yCoordinates) - (this.borderWidth/2);
-      var highestY     = Math.min.apply(null, yCoordinates) + (this.borderWidth/2);
+
+      var lowestY      = Math.max.apply(null, yCoordinates) - (this.borderWidth / 2);
+      var highestY     = Math.min.apply(null, yCoordinates) + (this.borderWidth / 2);
       return 2 * (((lowestY - highestY) * (1 - percentage)) + highestY);
 
     },
