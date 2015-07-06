@@ -74,7 +74,7 @@ Polygon = (function() {
     },
 
     calculateFillHeight: function(percentage, size) {
-      if (percentage === 1 || typeof percentage === 'undefined' || percentage === null) { return 0.99999; };
+      if (percentage === 1 || typeof percentage === 'undefined' || percentage === null) { return 1; };
 
       var yCoordinates = this.indeces.map(function(indexTuple) { return indexTuple[1]; });
       var lowestY      = Math.max.apply(null, yCoordinates) - (this.borderWidth/2);
