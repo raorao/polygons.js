@@ -28,7 +28,7 @@ available options:
 - sides: (INT) sets number of sides of shape.
 - borderWidth: (INT) sets width of border. defined in pixels.
 - size: (INT) sets size of element. unaffected by border width declarations. defined in pixels.
-- roundPercentage: (NUM) (OPTIONAL) rounds the borders by the provided percent.
+- roundPercentage: (NUM) (OPTIONAL) rounds the borders by the provided percent. currently produces strange behavior for triangles.
 - rotation: (NUM) (OPTIONAL) rotates the polygon by the provided percent. defaults to 0 if not provided.
 - borderColor: (STRING) (OPTIONAL) sets color of border. set with hash, e.g. `"#0000FF"`. defaults to black.
 - fillPercentage: (STRING) (OPTIONAL) sets amount of vertical fill from bottom to top. defaults to completely filled.
