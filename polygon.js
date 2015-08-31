@@ -11,7 +11,6 @@ Polygon = (function() {
     this.radius        = (opts.size - opts.borderWidth) / 2;
     this.center        = opts.size / 2;
     this.borderWidth   = opts.borderWidth;
-    this.roundCorners  = opts.roundCorners || true;
     this.borderColor   = opts.borderColor || 'black';
     this.fillColor     = opts.fillColor || 'white';
     this.unfilledColor = opts.unfilledColor || 'white';
@@ -59,10 +58,7 @@ Polygon = (function() {
 
     drawSides: function() {
       this.context.beginPath();
-
-      if (this.roundCorners) {
-        this.context.lineJoin = 'round';
-      };
+      this.context.lineJoin = 'round';
 
       this.indeces.forEach(function(indexTuple, position) {
         if (position === 0) {
