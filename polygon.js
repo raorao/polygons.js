@@ -11,7 +11,6 @@ Polygon = (function() {
     this.radius        = (opts.size - opts.borderWidth) / 2;
     this.center        = opts.size / 2;
     this.borderWidth   = opts.borderWidth;
-    this.roundPercentage = opts.roundPercentage || 0;
     this.borderColor   = opts.borderColor || 'black';
     this.fillColor     = opts.fillColor || 'white';
     this.unfilledColor = opts.unfilledColor || 'white';
@@ -90,22 +89,10 @@ Polygon = (function() {
       this.context.fillStyle = fillStyle;
     },
 
-    roundCorners: function() {
-      if (this.roundPercentage) {
-        this.context.closePath();
-        this.context.beginPath();
-        this.context.arc(this.center, this.center, this.radius + (this.borderWidth * 0.5), 0, 2 * Math.PI, false);
-        this.context.lineWidth = this.borderWidth * this.roundPercentage;
-        this.context.strokeStyle = 'white';
-        this.context.stroke();
-      }
-    },
-
     build: function() {
       this.drawSides();
       this.drawFill();
       this.context.stroke();
-      this.roundCorners();
       return this;
     }
   };
