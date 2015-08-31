@@ -72,6 +72,8 @@ Polygon = (function() {
         }
       }.bind(this));
 
+      this.context.closePath()
+
       this.context.strokeStyle = this.borderColor;
       this.context.lineWidth   = this.borderWidth;
     },
