@@ -32,4 +32,5 @@ available options:
 - fillPercentage: (STRING) (OPTIONAL) sets amount of vertical fill from bottom to top. defaults to completely filled.
 - fillColor: (STRING) (OPTIONAL) sets color of filled area. set with hash, e.g. `"#0000FF"`
 - unfilledColor: (STRING) (OPTIONAL) sets color of unfilled area. defaults to white.
+- roundCorners: (BOOL) (OPTIONAL) rounds corners. defaults to true.
 - fillImage: (CanvasImageSource) (OPTIONAL) sets background image of canvas shape. Thin wrapper around [CanvasRenderingContext2d.createPattern()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createPattern). This property can work in concert with fillColor and fillPercentage.
