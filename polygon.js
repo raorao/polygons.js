@@ -96,9 +96,19 @@ Polygon = (function() {
     roundCorners: function() {
       if (this.roundPercentage) {
         this.context.beginPath();
+        this.context.globalCompositeOperation = 'source-atop';
         this.context.arc(this.center, this.center, this.radius + (this.borderWidth * 0.5), 0, 2 * Math.PI, false);
+        this.context.closePath();
         this.context.lineWidth = this.borderWidth * this.roundPercentage;
         this.context.strokeStyle = 'white';
+        this.context.stroke();
+
+        this.context.beginPath();
+        this.context.globalCompositeOperation = 'source-atop';
+        this.context.arc(this.center, this.center, this.radius - (this.borderWidth * 0.5), 0, 2 * Math.PI, false);
+        this.context.closePath();
+        this.context.lineWidth = this.borderWidth * this.roundPercentage;
+        this.context.strokeStyle = this.borderColor;
         this.context.stroke();
       }
     },
