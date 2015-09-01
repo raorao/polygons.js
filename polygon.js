@@ -96,15 +96,15 @@ Polygon = (function() {
     roundCorners: function() {
       if (this.roundPercentage) {
         // exterior rounding
-        this.drawRoundingArc(this.radius + (this.borderWidth * 0.5), 'white')
+        this.drawRoundingArc(this.radius + (this.borderWidth * 0.5), 'white', 'destination-out')
         // interior rounding
-        this.drawRoundingArc(this.radius - (this.borderWidth * 0.5), this.borderColor)
+        this.drawRoundingArc(this.radius - (this.borderWidth * 0.5), this.borderColor, 'source-atop')
       }
     },
 
-    drawRoundingArc: function(radius, color) {
+    drawRoundingArc: function(radius, color, gcoType) {
       this.context.beginPath();
-      this.context.globalCompositeOperation = 'source-atop';
+      this.context.globalCompositeOperation = gcoType;
       this.context.arc(this.center, this.center, radius, 0, 2 * Math.PI, false);
       this.context.closePath();
       this.context.lineWidth = this.borderWidth * this.roundPercentage;
