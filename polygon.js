@@ -69,7 +69,7 @@ Polygon = (function() {
         }
       }.bind(this));
 
-      this.context.closePath()
+      this.context.closePath();
 
       this.context.strokeStyle = this.borderColor;
       this.context.lineWidth   = this.borderWidth;
@@ -95,10 +95,12 @@ Polygon = (function() {
 
     roundCorners: function() {
       if (this.roundPercentage) {
+
         // exterior rounding
-        this.drawRoundingArc(this.radius + (this.borderWidth * 0.5), 'white', 'destination-out')
+        this.drawRoundingArc(this.radius + (this.borderWidth * 0.5), 'white', 'destination-out');
+
         // interior rounding
-        this.drawRoundingArc(this.radius - (this.borderWidth * 0.5), this.borderColor, 'source-atop')
+        this.drawRoundingArc(this.radius - (this.borderWidth * 0.5), this.borderColor, 'source-atop');
       }
     },
 
